@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,39 +24,54 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText firstNum = (EditText) findViewById(R.id.firstNum);
-                EditText secondNum = (EditText) findViewById(R.id.secondNum);
-                double firstNumVal = Double.parseDouble(firstNum.getText().toString());
-                double secondNumVal = Double.parseDouble(secondNum.getText().toString());
-                Log.i("test", firstNumVal + "clicked" + secondNumVal);
+                calculate('+');
             }
         });
         subButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("test", "clicked");
+                calculate('-');
             }
         });
         multButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("test", "clicked");
+                calculate('*');
             }
         });
         divButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("test", "clicked");
+                calculate('/');
             }
         });
     }
 
-    private double calculate(){
+    private void calculate(char op){
         EditText firstNum = (EditText) findViewById(R.id.firstNum);
         EditText secondNum = (EditText) findViewById(R.id.secondNum);
         double firstNumVal = Double.parseDouble(firstNum.getText().toString());
         double secondNumVal = Double.parseDouble(secondNum.getText().toString());
-        Log.i("test", firstNumVal + "clicked" + secondNumVal);
-        return 0;
+        TextView resultNum = (TextView)findViewById(R.id.resultNum);
+        Log.i("test", firstNumVal + "-" + secondNumVal);
+
+        double res = 0;
+        switch(op){
+            case '+':
+                res = firstNumVal + secondNumVal;
+                break;
+            case '-':
+                res = firstNumVal - secondNumVal;
+                break;
+            case '*':
+                res = firstNumVal * secondNumVal;
+                break;
+            case '/':
+                res = firstNumVal / secondNumVal;
+                break;
+            default:
+                res = 0.0;
+        }
+        resultNum.setText(Double.toString(res));
     }
 }
